@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="main.css">
+    <title>Send Form</title>
+</head>
+
+<body>
+    <h1>Things to do </h1>
+    <div class="container">
+        <label for="myinput">Description</label>
+        <input id="description" type="text" value="">
+        <label for="myinput">Status</label>
+        <input id ="status" type="text" value="">
+
+        <div class="container">
+            <input id="submit" type="submit">
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+    <script>
+        $('#submit').click(function() {
+            $.ajax({
+                type: "POST",
+                url: 'http://localhost:8890',
+                data:{
+                    description: $('#description').val();
+                    status: $('#status').val();
+                }
+
+            });
+        });
+    </script>
+
+</body>
+
+</html>
