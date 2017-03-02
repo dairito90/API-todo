@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use(express.static("statics"));
 
 
 app.get('/todos', function(req, res) {

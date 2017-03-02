@@ -15,22 +15,41 @@
         <label for="myinput">Description</label>
         <input id="description" type="text" value="">
         <label for="myinput">Status</label>
-        <input id ="status" type="text" value="">
+        <input id="status" type="text" value="">
 
         <div class="container">
             <input id="submit" type="submit">
         </div>
+        <div id="todo"></div>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 
     <script>
         $('#submit').click(function() {
+        $.ajax({
+            url: "http://localhost:8890/todos",
+            method: 'GET',
+            success: function(dr) {
+                $('#todo').html("")
+                dr.forEach(function(api) {
+                    $('#todo').append(`<tr><td>${api.description}</td>, <td>${api.status}</td></tr>`)
+                });
+            },
+        });
+        });
+
+
+        $('#submit').click(function() {
             $.ajax({
-                type: "POST",
-                url: 'http://localhost:8890',
-                data:{
-                    description: $('#description').val();
-                    status: $('#status').val();
+                url: 'http://localhost:8890/todos',
+                method: "POST",
+                success: function() {
+                    console.log("yous data is been post")
+                },
+                data: {
+                    description: $('#description').val(),
+                    status: $('#status').val()
                 }
 
             });
